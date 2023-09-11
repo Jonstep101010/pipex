@@ -96,6 +96,9 @@ norme:
 upgrade:
 	-$(MAKE) update && $(MAKE) re
 
+test:
+	cargo test --manifest-path ./../tests-pipex/Cargo.toml
+
 .PHONY: run update upgrade re
 # .SILENT:
 -include $(DEPS)
