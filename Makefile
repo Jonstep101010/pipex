@@ -97,7 +97,7 @@ upgrade:
 	-$(MAKE) update && $(MAKE) re
 
 test:
-	cargo test --manifest-path ./../tests-pipex/Cargo.toml
+	cd ./../tests-pipex && sh ./test.sh
 
 .PHONY: run update upgrade re
 # .SILENT:

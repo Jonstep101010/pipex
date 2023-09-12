@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 12:02:58 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/09/12 16:41:51 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/09/12 16:51:10 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-/*
-allowed external functions:
-- open, close, read, write
-- malloc, free
-- perror, strerror
-- access, dup, dup2
-- execve, exit, fork
-- pipe, unlink, wait, waitpid
-*/
+typedef struct s_input
+{
+	char		*infile;
+	char		*outfile;
+	char		*cmd1;
+	char		*cmd2;
+}	t_input;
 
-# include <fcntl.h>
-# include "libft.h"
-# include "structs.h"
-
-int		main(int argc, char **argv, char **ENV);
+typedef struct s_program
+{
+	t_input		input;
+}	t_program;
 
 #endif
