@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   create_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/11 12:02:58 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/09/13 16:39:22 by jschwabe         ###   ########.fr       */
+/*   Created: 2023/09/13 16:35:17 by jschwabe          #+#    #+#             */
+/*   Updated: 2023/09/13 16:35:26 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-/*
-allowed external functions:
-- open, close, read, write
-- malloc, free
-- perror, strerror
-- access, dup, dup2
-- execve, exit, fork
-- pipe, unlink, wait, waitpid
-*/
+bool	create_outfile(char *filename)
+{
+	int	fd;
 
-# include <fcntl.h>
-# include "libft.h"
-# include "structs.h"
-
-int		main(int argc, char **argv, char **ENV);
-
-void	print_file(char *filename);
-
-bool	create_outfile(char *filename);
-
-#endif
+	fd = open(filename, O_CREAT | O_RDWR, 0644);
+	if (fd < 0)
+		return (false);
+	ft_putstr_fd("Hello, World\n", fd);
+	close(fd);
+	return (true);
+}

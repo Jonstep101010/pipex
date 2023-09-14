@@ -15,11 +15,12 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/
+VPATH		:= src/ src/utils
 
 SRC			:= $(NAME).c
+SRC_UTILS	:= print_file.c create_file.c
 
-SRCS		:= $(SRC)
+SRCS		:= $(SRC) $(SRC_UTILS)
 
 # ---------------------------------------------------------------------------- #
 #                             compilation arguments                            #
@@ -50,8 +51,7 @@ $(LIB_FT):
 
 $(NAME): $(OBJS) $(LIB_FT)
 	$(info creating $(NAME) executable)
-	$(CC) $(CFLAGS) $(OBJS) -D WIDTH=$(WIDTH) -D HEIGHT=$(HEIGHT) \
-	$(LIB_FT) $(CPPFLAGS) $(LDLIB) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIB_FT) $(CPPFLAGS) $(LDLIB) $(LDFLAGS) -o $(NAME)
 	$(DONE_NL)
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
@@ -98,6 +98,13 @@ upgrade:
 
 test:
 	cd ./../tests-pipex && sh ./test.sh
+
+infile:
+	echo "Some test data." > ./../pipex/infile.txt;
+	echo "Line 2." >> ./../pipex/infile.txt;
+
+test_infile: infile
+	./pipex ./infile.txt
 
 .PHONY: run update upgrade re
 # .SILENT:
