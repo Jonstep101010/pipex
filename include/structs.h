@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/09/13 14:20:11 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/09/29 18:44:34 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ typedef struct s_input
 {
 	int			args;
 	char		*infile;
+	int			f1;
 	char		*outfile;
+	int			f2;
 	char		*cmd1;
+	char		**cmd1_args;
 	char		*cmd2;
+	char		*cmd2_args;
+	char		**envp;
 }	t_input;
-
-typedef struct s_program
-{
-	t_input		input;
-}	t_program;
 
 #endif

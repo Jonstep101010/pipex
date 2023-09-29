@@ -15,12 +15,14 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/ src/utils
+VPATH		:= src/ src/utils src/io src/processes
 
 SRC			:= $(NAME).c
 SRC_UTILS	:= print_file.c create_file.c
+SRC_IO		:= parsing.c
+SRC_PROCS	:= parent.c childs.c
 
-SRCS		:= $(SRC) $(SRC_UTILS)
+SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_IO) $(SRC_PROCS)
 
 # ---------------------------------------------------------------------------- #
 #                             compilation arguments                            #
@@ -87,7 +89,9 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 run: all
-	./$(NAME)
+	./$(NAME) infile.txt "echo off hello" "wc" outfile.txt
+# ./$(NAME) infile.txt "wc" "ls" outfile.txt
+# ./$(NAME) infile.txt "grep test" "wc -c" outfile.txt
 
 norme:
 	clear

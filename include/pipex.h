@@ -6,12 +6,21 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 12:02:58 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/09/13 16:39:22 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/09/29 16:49:02 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+
+/*
+pipes by default cause direction to shell -> command not found
+
+non existing files need to be created
+
+if no outfile specified, write to stdout
+*/
 
 /*
 allowed external functions:
@@ -26,6 +35,11 @@ allowed external functions:
 # include <fcntl.h>
 # include "libft.h"
 # include "structs.h"
+
+void	parse_input(int argc, char **argv, t_input *input);
+void	child_one(int end[2], t_input *input);
+void	child_two(int end[2], t_input *input);
+void	parent(t_input *input);
 
 int		main(int argc, char **argv, char **ENV);
 
