@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 12:02:58 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/09/29 16:49:02 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:56:50 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	parse_input(int argc, char **argv, t_input *input);
 void	child_one(int end[2], t_input *input);
 void	child_two(int end[2], t_input *input);
 void	parent(t_input *input);
-
-int		main(int argc, char **argv, char **ENV);
 
 void	print_file(char *filename);
 

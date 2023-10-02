@@ -6,18 +6,17 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:28 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/09/29 18:02:56 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/02 10:35:59 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-// #include <assert.h>
 
 /**
  * @param argc
  * @param argv
  * @param ENV environment to parse @todo
-@follow-up need to check if access(cmd_path, X_OK)
+ * @follow-up need to check if access(cmd_path, X_OK)
  * @return int EXITCODE
  */
 int	main(int argc, char **argv, char **envp)
