@@ -2,12 +2,12 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "C/C++ Runner: Debug Session",
+			"name": "pipex",
 			"type": "lldb",
 			"request": "launch",
-			"args": [],
-			"cwd": "/Users/Jonas/GitHub/projects/circle2/pipex",
-			"program": "/Users/Jonas/GitHub/projects/circle2/pipex/build/Debug/outDebug"
+			"args": ["infile.txt", "grep hello test", "wc -c", "outfile.txt"],
+			"cwd": "${workspaceFolder}",
+			"program": "${workspaceFolder}/**.out",
 		}
 	]
 }

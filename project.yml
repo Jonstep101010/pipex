@@ -24,9 +24,6 @@
 #:release_build:
 #  :output: MyApp.out
 #  :use_assembly: FALSE
-
-:environment:
-
 :extension:
   :executable: pipex
 
@@ -37,12 +34,11 @@
   :source:
     - src/**
   :support:
-    - test/support
+    - test/support/**
   :libraries:
     - include/libft/
   :include:
-    - include/libft/include
-    - include
+    - include/**
 
 :defines:
   # in order to add common defines:
