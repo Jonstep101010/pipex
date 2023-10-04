@@ -2,7 +2,8 @@
 # define REQS_H
 
 # include "libft.h"
-# include "pipex.h"
+// # include "pipex.h"
+# include "free.c"
 # include "parsing.c"
 # include "unity.h"
 // # include "structs.h"

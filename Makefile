@@ -18,7 +18,7 @@ BUILD_DIR	:= .build
 VPATH		:= src/ src/utils src/io src/processes
 
 SRC			:= $(NAME).c
-SRC_UTILS	:= print_file.c create_file.c
+SRC_UTILS	:= print_file.c create_file.c free.c
 SRC_IO		:= parsing.c
 SRC_PROCS	:= parent.c childs.c
 
