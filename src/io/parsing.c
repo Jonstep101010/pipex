@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:41:45 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/03 20:57:09 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:29:16 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	print_arr(char **arr)
 {
 	int	i = 0;
+	if ((!arr) || (!*arr))
+		return;
 	while (arr[i])
 	{
 		ft_printf("%d'%s'", i, arr[i]);
@@ -28,24 +30,24 @@ void	check_path(char **paths, char **cmd)
 	int	i = 0;
 	char	*tmp;
 
+	if (!paths || !*paths)
+		return;
 	tmp = *cmd;
 	*cmd = ft_strjoin("/", *cmd);
 	if (tmp)
-		free(tmp);
-
+		free_and_null(tmp);
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], *cmd);
 		if (access(tmp, X_OK) != FAIL)
 		{
 			// printf("freed:%s\n", *cmd);
-
-			free(*cmd);
+			free_and_null(*cmd);
 			// printf("set:%s\n", tmp);
 			*cmd = tmp;
 			return;
 		}
-		free(tmp);
+		free_and_null(tmp);
 		i++;
 	}
 }
@@ -67,79 +69,90 @@ void	parse_envp(t_input *input)
 	tmp = ft_strtrim(ENV[i], "PATH=");
 	if (tmp)
 		paths = ft_split(tmp, ':');
-	// if (!paths)
-	// {
-	// 	free_and_null((void*)tmp);
-	// 	arr_free(paths);
-	// 	free_and_exit(input, EXIT_FAILURE);
-	// }
 	free_and_null((void*)tmp);
-	// print_arr(paths);
 	check_path(paths, &(input->cmd1));
-	printf("cmd1:%s\n", input->cmd1);
+	// printf("cmd1:%s\n", input->cmd1);
 	check_path(paths, &(input->cmd2));
-	printf("cmd2:%s\n", input->cmd2);
+	// printf("cmd2:%s\n", input->cmd2);
 
 	arr_free(paths);
 }
 
-// void	arr_dup_range(char **arr, t_input *input, char **inparr, size_t start)
-// {
-// 	size_t	i;
-// 	char	**ret;
+char	**remove_first(char **arr)
+{
+	int	len;
+	int	i;
 
-// 	i = 0;
-// 	if (arr_len(arr) <= start)
-// 		return;
-// 	while (arr[i] && i <= start)
-// 		i++;
-// 	ret = (char **) ft_calloc(arr_len(arr) - start, sizeof(char *));
-// 	if (!ret)
-// 		free_and_exit(input, EXIT_FAILURE);
-// 	while (i < arr_len(arr) - start)
-// 	{
-// 		ret[i] = ft_strdup(arr[i]);
-// 		i++;
-// 	}
-// 	arr_free(arr);
-// 	inparr = ret;
-// }
+	if (!*arr || !arr[1])
+		return (NULL);
+	len = arr_len(arr);
+	ft_bzero(arr[0], ft_strlen(arr[0]));
+	free_and_null(arr[0]);
+	i = 0;
+	while (i < len - 1)
+	{
+		arr[i] = arr[i + 1];
+		i++;
+	}
+	arr[i] = NULL;
+	return (arr);
+}
 
 //@todo make sure exit is appropriate for case handling
 //@follow-up handle "here_doc"
 void	parse_input(int argc, char **argv, t_input *input)
 {
-	input->args = 0;
-	if (argc < 3)
-		free_and_exit(input, EXIT_FAILURE);
-	while (input->args < argc && argv[input->args])
-		input->args++;
 	char	**tmp1;
 	char	**tmp2;
 
-	tmp1 = ft_split(argv[2], ' ');
-	tmp2 = ft_split(argv[3], ' ');
-	if (!tmp1[0] || !tmp2[0])
+	if (argc < 5)
 		free_and_exit(input, EXIT_FAILURE);
-	*input = (t_input)
+	while (input->args < argc && argv[input->args])
+		input->args++;
+	if (argv[1])
 	{
-		.infile = argv[1],
-		.f1 = open(argv[1], O_RDONLY),
-		.cmd1 = ft_strdup(tmp1[0]),
-		.cmd2 = ft_strdup(tmp2[0]),
-		.outfile = argv[4],
-		.f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644),
-	};
-	print_arr(tmp1);
-	arr
-	print_arr(tmp2);
-	arr_free(tmp2);
-	arr_free(tmp1);
-	print_arr(input->cmd1_args);
-	// printf("%s\n", input->cmd2);
-	print_arr(input->cmd2_args);
-	// printf("%s\n", input->outfile);
+		input->infile = argv[1];
+		input->f1 = open(input->infile, O_RDONLY);
+		if (input->f1 < 0)
+			free_and_exit(input, EXIT_FAILURE);
+	}
+	if (argv[2])
+	{
+		tmp1 = ft_split(argv[2], ' ');
+		if (!tmp1 || !tmp1[0])
+			free_and_exit(input, EXIT_FAILURE);
+		input->cmd1 = ft_strdup(tmp1[0]);
+		input->cmd1_args = tmp1;
+	}
 
-
+	if (argv[3])
+	{
+		tmp2 = ft_split(argv[3], ' ');
+		if (!tmp2 || !*tmp2)
+			free_and_exit(input, EXIT_FAILURE);
+		else
+		{
+			input->cmd2 = ft_strdup(tmp2[0]);
+			input->cmd2_args = tmp2;
+		}
+	}
+	if (argv[4])
+	{
+		input->outfile = argv[4],
+		input->f2 = open(argv[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
+	}
 }
+
+	// input->cmd1_args = argv[2];
+	// print_arr(input->cmd1_args);
+	// input->cmd2_args = argv[3];
+	// print_arr(input->cmd2_args);
+
+	// char **wth
+	// wth[0] = path
+	// wth[1] = -c
+	// wth[2] = cmd (non spplitted)
+	// wth[3] = NULL;
+	// execve(path ohne cmd, wwth, envp)
+	// execve(path!, )
 

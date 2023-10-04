@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:28 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/03 20:39:06 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/04 17:22:48 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,15 @@ void	free_and_exit(t_input *input, int exit_code)
 		free_and_null(input->cmd1);
 	if (input->cmd2)
 		free_and_null(input->cmd2);
-
 	if (input->cmd1_args)
 		arr_free(input->cmd1_args);
 	if (input->cmd2_args)
 		arr_free(input->cmd2_args);
-
 	close(input->f1);
 	close(input->f2);
-
 	input->envp = NULL;
-	perror("freed and exited");
 	exit(exit_code);
 }
-
 
 /**
  * @param argc
@@ -51,9 +46,10 @@ void	free_and_exit(t_input *input, int exit_code)
  * @follow-up need to check if access(cmd_path, X_OK)
  * @return int EXITCODE
  */
+	// print_arr(envp);
+	// atexit(check_leaks);
 int	main(int argc, char **argv, char **envp)
 {
-	// atexit(check_leaks);
 	t_input	input;
 
 	ft_bzero(&input, sizeof(input));
@@ -68,3 +64,5 @@ int	main(int argc, char **argv, char **envp)
 	parent(&input);
 	free_and_exit(&input, EXIT_SUCCESS);
 }
+	// printf("%s\n", input.cmd1);
+	// printf("%s\n", input.cmd2);

@@ -89,7 +89,7 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 run: all
-	./$(NAME) infile.txt "grep hello test" "wc -c" outfile.txt
+	./$(NAME) infile.txt "grep test" "wc" outfile.txt
 # ./$(NAME) infile.txt "wc" "ls" outfile.txt
 # ./$(NAME) infile.txt "grep test" "wc -c" outfile.txt
 

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:39:07 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/03 18:38:12 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/04 16:44:10 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 // char *const	arguments[] = {input->cmd1, input->cmd1_args, NULL};
 void	child_one(int end[2], t_input *input)
 {
+	// print_arr(input->cmd1_args);
+	// char *const	arguments[] = {"grep",  input->cmd1_args, NULL};
+
 	// printf("%s\n", input->cmd1_args[1]);
 	dup2(input->f1, STDIN_FILENO);
 	dup2(end[1], STDOUT_FILENO);
@@ -27,7 +30,7 @@ void	child_one(int end[2], t_input *input)
 	close(end[1]);
 	if (execve((char const *)input->cmd1, input->cmd1_args \
 		, input->envp) == -1)
-		return (perror("execve child_one"), exit(EXIT_FAILURE));
+		return (perror("execve child_one"), free_and_exit(input, EXIT_FAILURE));
 }
 
 /*
