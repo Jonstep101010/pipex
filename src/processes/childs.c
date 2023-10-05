@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:39:07 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/04 16:44:10 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/05 10:39:21 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 @todo implement path finding for these
 @todo handle errors appropriately
 */
-// char *const	arguments[] = {input->cmd1, input->cmd1_args, NULL};
 void	child_one(int end[2], t_input *input)
 {
 	// print_arr(input->cmd1_args);
@@ -45,5 +44,5 @@ void	child_two(int end[2], t_input *input)
 	close(input->f2);
 	if (execve((char const *)input->cmd2, input->cmd2_args \
 		, input->envp) == -1)
-		return (perror("execve child_one"), exit(EXIT_FAILURE));
+		return (perror("execve child_two"), free_and_exit(input, EXIT_FAILURE));
 }

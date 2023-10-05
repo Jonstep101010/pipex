@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:41:45 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/04 17:29:16 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/05 11:13:32 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,19 @@ void	check_path(char **paths, char **cmd)
 	tmp = *cmd;
 	*cmd = ft_strjoin("/", *cmd);
 	if (tmp)
-		free_and_null(tmp);
+		free_null_str(&tmp);
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], *cmd);
 		if (access(tmp, X_OK) != FAIL)
 		{
 			// printf("freed:%s\n", *cmd);
-			free_and_null(*cmd);
+			free_null_str(cmd);
 			// printf("set:%s\n", tmp);
 			*cmd = tmp;
 			return;
 		}
-		free_and_null(tmp);
+		free_null_str(&tmp);
 		i++;
 	}
 }
@@ -69,7 +69,7 @@ void	parse_envp(t_input *input)
 	tmp = ft_strtrim(ENV[i], "PATH=");
 	if (tmp)
 		paths = ft_split(tmp, ':');
-	free_and_null((void*)tmp);
+	free_null_str(&tmp);
 	check_path(paths, &(input->cmd1));
 	// printf("cmd1:%s\n", input->cmd1);
 	check_path(paths, &(input->cmd2));
@@ -87,7 +87,7 @@ char	**remove_first(char **arr)
 		return (NULL);
 	len = arr_len(arr);
 	ft_bzero(arr[0], ft_strlen(arr[0]));
-	free_and_null(arr[0]);
+	free_null_str(&(arr[0]));
 	i = 0;
 	while (i < len - 1)
 	{
@@ -114,7 +114,10 @@ void	parse_input(int argc, char **argv, t_input *input)
 		input->infile = argv[1];
 		input->f1 = open(input->infile, O_RDONLY);
 		if (input->f1 < 0)
-			free_and_exit(input, EXIT_FAILURE);
+		{
+			fprintf(stderr, "pipex: No such file or directory: %s\n", argv[1]);
+			free_and_exit(input, EXIT_SUCCESS);
+		}
 	}
 	if (argv[2])
 	{
