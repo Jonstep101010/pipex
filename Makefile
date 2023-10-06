@@ -18,8 +18,8 @@ BUILD_DIR	:= .build
 VPATH		:= src/ src/utils src/io src/processes
 
 SRC			:= $(NAME).c
-SRC_UTILS	:= print_file.c create_file.c free.c
-SRC_IO		:= parsing.c
+SRC_UTILS	:= print_file.c create_file.c free.c print_arr.c
+SRC_IO		:= parsing.c path_env.c
 SRC_PROCS	:= parent.c childs.c
 
 SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_IO) $(SRC_PROCS)
@@ -90,7 +90,7 @@ re:
 # ----------------------------- additional rules ----------------------------- #
 run: all
 	./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt
-	./$(NAME) infile.txt "grep test" "awk {count++} END {print count}" outfile.txt
+#./$(NAME) infile.txt "grep test" "awk {count++} END {print count}" outfile.txt;
 # ./$(NAME) infile.txt "grep test" "wc" outfile.txt
 # ./$(NAME) infile.txt "wc" "ls" outfile.txt
 # ./$(NAME) infile.txt "grep test" "wc -c" outfile.txt
