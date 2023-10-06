@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:39:07 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/05 10:39:21 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:03:20 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 void	child_one(int end[2], t_input *input)
 {
 	// print_arr(input->cmd1_args);
-	// char *const	arguments[] = {"grep",  input->cmd1_args, NULL};
 
 	// printf("%s\n", input->cmd1_args[1]);
 	dup2(input->f1, STDIN_FILENO);
@@ -36,6 +35,11 @@ void	child_one(int end[2], t_input *input)
 @follow-up implement multiple arguments to a cmd*/
 void	child_two(int end[2], t_input *input)
 {
+	// print_arr(input->cmd2_args);
+	// printf("%s\n", input->cmd2_args[1]);
+	// printf("%zu\n", arr_len(input->cmd2_args));
+	// char *const	arguments[] = {"awk", "{count++} END {print count}", NULL};
+	// printf("%s\n", arguments[1]);
 	// ft_printf("%s", input->cmd2);
 	dup2(end[0], STDIN_FILENO);
 	close(end[1]);

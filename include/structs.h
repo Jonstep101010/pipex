@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/04 16:24:22 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:54:55 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 typedef struct s_input
 {
+	int			exit;
 	int			args;
+	char		**argv;
 	char		*infile;
 	int			f1;
 	char		*outfile;

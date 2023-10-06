@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:28 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/05 10:39:46 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:34:40 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ int	main(int argc, char **argv, char **envp)
 	// if (argc <= 2 && argv[1])
 	// {
 	// 	ft_printf("%s", argv[1]);
-	// 	free_and_exit(&input, EXIT_SUCCESS);
+	// 	(&input, EXIT_SUCCESS);
 	// }
+	input.argv = argv;
 	parse_input(argc, argv, &input);
 	input.envp = envp;
 	parse_envp(&input);
 	parent(&input);
-	free_and_exit(&input, EXIT_SUCCESS);
+	return WEXITSTATUS(input.exit);
 }
 	// printf("%s\n", input.cmd1);
 	// printf("%s\n", input.cmd2);
