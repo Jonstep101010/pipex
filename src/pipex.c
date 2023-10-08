@@ -6,11 +6,13 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:28 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/06 19:15:08 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/08 18:47:51 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+// #ifdef RELEASE
 
 void	check_leaks(void)
 {
@@ -34,9 +36,19 @@ int	main(int argc, char **argv, char **envp)
 	input.argv = argv;
 	parse_input(argc, argv, &input);
 	parse_envp(&input, envp);
+	// while (input.args > 5)
+	// {
+	// 	if (argv[argc + 1])
+	// 		continue;
+	// 	input.args--;
+	// 		// input.f2 = open()
+
+	// }
+	// else
 	parent(&input);
 	free_and_exit(&input, EXIT_SUCCESS);
 }
+// #endif
 	// print_arr(input.cmd2_args);
 	// printf("%s\n", input.cmd1);
 	// printf("%s\n", input.cmd2);

@@ -8,13 +8,14 @@
 :project:
   :use_exceptions: FALSE
   :use_test_preprocessor: TRUE
+  :use_deep_dependencies: TRUE
   :use_auxiliary_dependencies: TRUE
-  :use_deep_dependencies: FALSE
+  :use_auto_dependencies: TRUE
   :build_root: .build_test
-  # :release_build: TRUE
+#  :release_build: TRUE
   :test_file_prefix: test_
   :which_ceedling: gem
-  :ceedling_version: 0.31.1
+  :ceedling_version: '?'
   :default_tasks:
     - test:all
 
@@ -24,8 +25,11 @@
 #:release_build:
 #  :output: MyApp.out
 #  :use_assembly: FALSE
+
+:environment:
+
 :extension:
-  :executable: pipex
+  :executable: .out
 
 :paths:
   :test:
@@ -34,11 +38,13 @@
   :source:
     - src/**
   :support:
-    - test/support/**
+    - test/support
   :libraries:
     - include/libft/
   :include:
-    - include/**
+    - include/
+    - include/libft/include/
+    - src/**
 
 :defines:
   # in order to add common defines:
@@ -51,24 +57,6 @@
   :test_preprocess:
     - *common_defines
     - TEST
-    - TEST_BUILD
-  :release:
-    - *common_defines
-    - RELEASE
-
-:flags:
-  :test:
-    :compile:
-      :*:
-        - -Wall
-        - -Wextra
-        - -Werror
-  :release:
-    :compile:
-        - -Wall
-        - -Wextra
-        - -Werror
-        - -g3"
 
 :cmock:
   :mock_prefix: mock_
@@ -77,8 +65,6 @@
   :plugins:
     - :ignore
     - :callback
-    - :ignore_arg
-    - :return_thru_ptr
   :treat_as:
     uint8:    HEX8
     uint16:   HEX16
@@ -101,12 +87,12 @@
 # As [:tools] is blank, gcc will be used (so long as it's in your system path)
 # See documentation to configure a given toolchain for use
 
+
 # LIBRARIES
 # These libraries are automatically injected into the build process. Those specified as
 # common will be used in all types of builds. Otherwise, libraries can be injected in just
 # tests or releases. These options are MERGED with the options in supplemental yaml files.
 :libraries:
-  :includes: "libft.h"
   :placement: :end
   :flag: "-l${1}"
   :path_flag: "-L ${1}"
@@ -115,8 +101,10 @@
     - ft
   :artifacts:
     :includes:
-      - include/libft/include/**
-  :release: []
+      - include/libft/include/*
+      - include/*
+  :release:
+    - ft
 
 :plugins:
   :load_paths:
@@ -125,4 +113,11 @@
     - xml_tests_report
     - stdout_pretty_tests_report
     - module_generator
+    - gcov
+:module_generator:
+  :test_define: CEEDLING_TEST
+  :project_root: ./
+  :source_root: src/
+  :include_root: include/
+  :test_root: test/
 ...

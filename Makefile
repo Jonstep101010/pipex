@@ -19,7 +19,7 @@ VPATH		:= src/ src/utils src/io src/processes
 
 SRC			:= $(NAME).c
 SRC_UTILS	:= print_file.c create_file.c free.c print_arr.c
-SRC_IO		:= parsing.c path_env.c
+SRC_IO		:= parsing.c path_env.c parse_args.c
 SRC_PROCS	:= parent.c childs.c
 
 SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_IO) $(SRC_PROCS)
@@ -32,7 +32,7 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
-CFLAGS		?= -g3 -Wall -Wextra -Werror #-Wpedantic
+CFLAGS		?= -g3 -Wall -Wextra -Werror -DRELEASE=1 #-Wpedantic
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS		= $(addprefix -L, $(dir $(LIB_FT)))
 LDLIB		:= $(addprefix -l, $(LIB))
@@ -41,6 +41,8 @@ MAKEFLAGS	+= --no-print-directory --silent
 
 DONE		= printf "\033[0;32m\xE2\x9C\x93\033[0m "
 DONE_NL		= printf "\033[0;32m\xE2\x9C\x93\n\033[0m"
+
+# RELEASE		= 0
 
 # ---------------------------------------------------------------------------- #
 #                             building the program                             #

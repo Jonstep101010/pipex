@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 12:02:58 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/06 17:56:25 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/08 17:31:38 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ allowed external functions:
 # include "libft.h"
 # include "structs.h"
 
+char	**parse_args(char *s);
 void	print_arr(char **arr);
 void	free_and_null(void *tofree);
 void	free_null_str(char **tofree);
@@ -49,5 +50,4 @@ void	parent(t_input *input);
 void	print_file(char *filename);
 
 bool	create_outfile(char *filename);
-
-#endif
+#endif // PIPEX_H
