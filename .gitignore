@@ -59,3 +59,6 @@ resources/
 Unity/
 .build/
 pipex
+test/
+chat_*.md
+.build_test/
