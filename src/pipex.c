@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:28 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/08 18:47:51 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:24:30 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ void	check_leaks(void)
 
 	// print_arr(envp);
 	// atexit(check_leaks);
+// void	setup(t_input *input)
+// {
+// 	ft_bzero(input, sizeof(input));
+// 	input->f1 = -1;
+// 	input->f2 = -1;
+// 	input->exit = -1;
+// }
 /**
  * @param argc
  * @param argv
@@ -32,6 +39,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_input	input;
 
+	if (argc < 5)
+		exit(EXIT_FAILURE);
+	// setup(&input);
 	ft_bzero(&input, sizeof(input));
 	input.argv = argv;
 	parse_input(argc, argv, &input);
