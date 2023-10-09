@@ -59,7 +59,6 @@ resources/
 Unity/
 .build/
 pipex
-src/Unity/
+test/
+chat_*.md
 .build_test/
-test/_*.c
-.ruby-version
