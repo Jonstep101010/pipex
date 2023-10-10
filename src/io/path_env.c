@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:22:30 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/06 18:23:05 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:35:47 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	check_path(char **paths, char **cmd)
 	if (!paths || !*paths)
 		return ;
 	tmp = *cmd;
-	*cmd = ft_strjoin("/", *cmd);
+	if (*cmd && **cmd != '/')
+		*cmd = ft_strjoin("/", *cmd);
 	if (tmp)
 		free_null_str(&tmp);
 	i = 0;
@@ -58,9 +59,12 @@ void	parse_envp(t_input *input, char **ENV)
 		input->envp = ENV;
 		free_null_str(&tmp);
 	}
-	check_path(paths, &(input->cmd1));
-	check_path(paths, &(input->cmd2));
+	if (input->search == true)
+		check_path(paths, &(input->middle));
+	else
+	{
+		check_path(paths, &(input->cmd1));
+		check_path(paths, &(input->cmd2));
+	}
 	arr_free(paths);
 }
-	// printf("cmd1:%s\n", input->cmd1);
-	// printf("cmd2:%s\n", input->cmd2);

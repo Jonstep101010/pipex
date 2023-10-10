@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:38:37 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/06 17:53:34 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:27:00 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	free_and_exit(t_input *input, int exit_code)
 		free_null_str(&(input->cmd1));
 	if (input->cmd2)
 		free_null_str(&(input->cmd2));
+	if (input->middle)
+		free_null_str(&(input->middle));
 	if (input->cmd1_args)
 		arr_free(input->cmd1_args);
 	if (input->cmd2_args)

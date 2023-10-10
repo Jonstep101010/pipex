@@ -47,8 +47,8 @@ DONE_NL		= printf "\033[0;32m\xE2\x9C\x93\n\033[0m"
 # ---------------------------------------------------------------------------- #
 #                             building the program                             #
 # ---------------------------------------------------------------------------- #
-
 all: $(NAME)
+bonus: all
 
 $(LIB_FT):
 	$(MAKE) -C $(@D) -B
@@ -91,9 +91,10 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 run: all
-	./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt
+	./$(NAME) infile.txt "grep test" "wc" outfile.txt
+# ./$(NAME) infile.txt "ls -l src/" "grep .c" "wc -l" outfile.txt
+# ./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt
 #./$(NAME) infile.txt "grep test" "awk {count++} END {print count}" outfile.txt;
-# ./$(NAME) infile.txt "grep test" "wc" outfile.txt
 # ./$(NAME) infile.txt "wc" "ls" outfile.txt
 # ./$(NAME) infile.txt "grep test" "wc -c" outfile.txt
 
