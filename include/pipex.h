@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 12:02:58 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/09 16:34:31 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/11 10:59:11 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_and_exit(t_input *input, int exit_code);
 
 void	parse_envp(t_input *input, char **envp);
 void	parse_input(int argc, char **argv, t_input *input);
-void	child(int end[2], t_input *input);
+void	first_child(int end[2], t_input *input);
 
 void	middle_child(int end[2], t_input *input, char *cmd, char **cmdargs);
 void	last_child(int end[2], t_input *input);

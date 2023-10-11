@@ -91,9 +91,11 @@ re:
 
 # ----------------------------- additional rules ----------------------------- #
 run: all
-	./$(NAME) infile.txt "grep test" "wc" outfile.txt
-# ./$(NAME) infile.txt "ls -l src/" "grep .c" "wc -l" outfile.txt
-# ./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt
+	rm -f outfile.txt
+	./$(NAME) infile.txt "ls -l src/" "grep .c" "wc -l" outfile.txt; cat outfile.txt
+	./$(NAME) infile.txt "grep test" "wc" outfile.txt; cat outfile.txt
+	./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt; cat outfile.txt
+	./$(NAME) "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"; cat outs/test-xx.txt
 #./$(NAME) infile.txt "grep test" "awk {count++} END {print count}" outfile.txt;
 # ./$(NAME) infile.txt "wc" "ls" outfile.txt
 # ./$(NAME) infile.txt "grep test" "wc -c" outfile.txt

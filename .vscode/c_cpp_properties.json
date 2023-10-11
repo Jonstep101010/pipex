@@ -4,7 +4,7 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/Users/jschwabe/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/ceedling-0.31.1/vendor/unity/src/**",
+                "/Users/jschwabe/.rbenv/versions/3.0.0/lib/ruby/gems/3.0.0/gems/ceedling-0.31.1/vendor/unity/src/**",
                 "**/**"
             ],
             "defines": [],
