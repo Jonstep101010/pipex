@@ -61,5 +61,4 @@ Unity/
 pipex
 src/Unity/
 .build_test/
-chat_*.md
 test/_*.c

@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:41:45 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/11 10:45:53 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/12 17:38:13 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	parse_input(int argc, char **argv, t_input *input)
 		free_and_exit(input, EXIT_FAILURE);
 	input->search = false;
 	input->infile = argv[1];
+	input->exit = EXIT_SUCCESS;
 	input->f1 = open(input->infile, O_RDONLY);
 	if (input->f1 < 0)
 		free_and_exit(input, EXIT_SUCCESS);

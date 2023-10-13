@@ -6,30 +6,37 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:44:23 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/11 11:45:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/13 09:52:24 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+typedef struct s_pid
+{
+	pid_t	first;
+	pid_t	middle;
+	pid_t	last;
+}	t_pid;
+
 void	parent(t_input *input)
 {
 	int		end[2];
-	pid_t	child1;
-	pid_t	child2;
-	pid_t	middle;
+	t_pid	childs;
 	int		i;
 	char	**cmdargs;
 
 	pipe(end);
-	child1 = fork();
-	if (child1 == -1)
+	childs.first = fork();
+	if (childs.first == -1)
 		return (perror("Fork: "));
-	else if (child1 == 0)
+	else if (childs.first == 0)
 	{
 		first_child(end, input);
-		waitpid(child1, 0, 0);
+		waitpid(childs.first, &input->exit, 0);
 	}
+	// if (input->exit != EXIT_SUCCESS)
+	// 	free_and_exit(input, input->exit);
 	i = 3;
 	cmdargs = NULL;
 	dup2(end[0], STDIN_FILENO);
@@ -43,14 +50,16 @@ void	parent(t_input *input)
 		parse_envp(input, input->envp);
 		input->search = false;
 		pipe(end);
-		middle = fork();
-		if (middle == -1)
+		childs.middle = fork();
+		if (childs.middle == -1)
 			return (perror("Fork: "), free_and_exit(input, EXIT_FAILURE));
-		else if (middle == 0)
+		else if (childs.middle == 0)
 		{
 			middle_child(end, input, input->middle, cmdargs);
-			waitpid(middle, 0, 0);
+			waitpid(childs.middle, &input->exit, 0);
 		}
+		if (input->exit != EXIT_SUCCESS)
+			free_and_exit(input, input->exit);
 		if (dup2(end[0], STDIN_FILENO) == -1)
 			return (perror("dup2 middle"), free_and_exit(input, EXIT_FAILURE));
 		arr_free(cmdargs);
@@ -61,20 +70,20 @@ void	parent(t_input *input)
 			close(end[1]);
 		}
 	}
-	child2 = fork();
-	// waitpid(child1, 0, 0);
-	if (child2 == -1)
+	childs.last = fork();
+	if (childs.last == -1)
 	{
 		return (perror("Fork: "), free_and_exit(input, EXIT_FAILURE));
 	}
-	else if (child2 == 0)
+	else if (childs.last == 0)
 	{
 		last_child(end, input);
-		waitpid(child2, 0, 0);
+		waitpid(childs.last, &input->exit, 0);
 	}
 	close(end[0]);
 	close(end[1]);
-	waitpid(-1, 0, 0);
-	// while (waitpid(-1, 0, 0) != -1)
+	waitpid(-1, &input->exit, 0);
+	// fprintf(stderr, "%d\n", input->exit);
+	// while (waitpid(-1, &input->exit, 0) != -1)
 	// 	;
 }

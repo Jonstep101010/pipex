@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/10 11:06:51 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:08:27 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_input
 	char		*cmd2;
 	char		**cmd2_args;
 	char		**envp;
+	char		*LIMITER;
 }	t_input;
 
 #endif
