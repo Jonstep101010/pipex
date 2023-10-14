@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 12:02:58 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/11 10:59:11 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:34:01 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ allowed external functions:
 # include "libft.h"
 # include "structs.h"
 
+void	here_doc(t_input *input, char **envp);
 char	**parse_args(char *s);
 void	print_arr(char **arr);
 void	free_and_null(void *tofree);

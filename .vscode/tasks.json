@@ -1,0 +1,9 @@
+//vscode build task calling make
+{
+	"options": {},
+	"command": "make",
+	"group": {
+		"kind": "build",
+		"isDefault": true
+	},
+}

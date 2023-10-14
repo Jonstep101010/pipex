@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/13 11:08:27 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/13 19:40:30 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,42 @@ typedef struct s_input
 	char		**argv;
 	char		*infile;
 	int			f1;
-	char		*outfile;
 	int			f2;
+	char		*outfile;
 	char		*cmd1;
 	char		**cmd1_args;
 	char		*middle;
 	char		*cmd2;
 	char		**cmd2_args;
 	char		**envp;
-	char		*LIMITER;
+	char		*limiter;
 }	t_input;
+
+typedef struct s_here_doc
+{
+	char	*limiter;
+}	t_here_doc;
+
+/* @follow-up search is deprecated */
+typedef struct s_multiple
+{
+	char	*cmd;
+	pid_t	first;
+	pid_t	middle;
+	pid_t	last;
+}	t_multiple;
+
+typedef struct s_pipe
+{
+	void		(*pipe_kind);
+	int			exit_status;
+	int			fd_in;
+	int			fd_out;
+	t_here_doc	*here_doc;
+	char		*first_cmd;
+	char		*last_cmd;
+	int			end[2];
+	t_input		*input;
+}	t_pipe;
 
 #endif

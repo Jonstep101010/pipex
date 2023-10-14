@@ -20,7 +20,7 @@ VPATH		:= src/ src/utils src/io src/processes
 SRC			:= $(NAME).c
 SRC_UTILS	:= print_file.c create_file.c free.c print_arr.c
 SRC_IO		:= parsing.c path_env.c parse_args.c
-SRC_PROCS	:= parent.c childs.c
+SRC_PROCS	:= parent.c childs.c here_doc.c
 
 SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_IO) $(SRC_PROCS)
 
