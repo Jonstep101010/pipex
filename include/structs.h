@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/17 18:10:15 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:07:03 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 typedef struct s_input
 {
-	bool		search;
 	int			exit;
 	int			ac;
 	char		**av;
@@ -33,10 +32,29 @@ typedef struct s_input
 	char		*limiter;
 }	t_input;
 
-// typedef struct s_here_doc
-// {
-// 	char	*limiter;
-// }	t_here_doc;
+typedef struct s_here_doc
+{
+	char	*line;
+	int		end[2];
+	pid_t	first;
+	pid_t	last;
+	char	*limiter;
+}	t_here_doc;
+
+typedef struct s_pid
+{
+	pid_t	first;
+	pid_t	middle;
+	pid_t	last;
+}	t_pid;
+
+typedef struct s_pipes
+{
+	t_pid	childs;
+	int		end[2];
+	int		i;
+	char	**cmdargs;
+}	t_pipes;
 
 // /* @follow-up search is deprecated */
 // typedef struct s_multiple
