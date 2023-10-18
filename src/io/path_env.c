@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:22:30 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/10 18:35:47 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:23:13 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,12 @@ void	check_path(char **paths, char **cmd)
 	}
 }
 
-void	parse_envp(t_input *input, char **ENV)
+/**
+ * @brief pass address of cmd and environment
+ * @param cmd will be concatenated to contain binary path
+ * @param ENV 
+ */
+void	parse_envp(char **cmd, char **ENV)
 {
 	char	**paths;
 	char	*tmp;
@@ -56,15 +61,8 @@ void	parse_envp(t_input *input, char **ENV)
 		tmp = ft_strtrim(ENV[i], "PATH=");
 		if (tmp)
 			paths = ft_split(tmp, ':');
-		input->envp = ENV;
 		free_null_str(&tmp);
 	}
-	if (input->search == true)
-		check_path(paths, &(input->middle));
-	else
-	{
-		check_path(paths, &(input->cmd1));
-		check_path(paths, &(input->cmd2));
-	}
+	check_path(paths, cmd);
 	arr_free(paths);
 }

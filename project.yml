@@ -113,7 +113,6 @@
     - xml_tests_report
     - stdout_pretty_tests_report
     - module_generator
-    - gcov
 :module_generator:
   :test_define: CEEDLING_TEST
   :project_root: ./

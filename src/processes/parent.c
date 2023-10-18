@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:44:23 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/13 09:52:24 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/18 11:36:39 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,44 +19,26 @@ typedef struct s_pid
 	pid_t	last;
 }	t_pid;
 
-void	parent(t_input *input)
+void	helper_multiple(t_input *input, int end[2], pid_t *middle)
 {
-	int		end[2];
-	t_pid	childs;
-	int		i;
 	char	**cmdargs;
+	int		i;
 
-	pipe(end);
-	childs.first = fork();
-	if (childs.first == -1)
-		return (perror("Fork: "));
-	else if (childs.first == 0)
-	{
-		first_child(end, input);
-		waitpid(childs.first, &input->exit, 0);
-	}
-	// if (input->exit != EXIT_SUCCESS)
-	// 	free_and_exit(input, input->exit);
-	i = 3;
 	cmdargs = NULL;
-	dup2(end[0], STDIN_FILENO);
-	close(end[0]);
-	close(end[1]);
-	while (i < input->args - 2)
+	i = 3;
+	while (i < input->ac - 2)
 	{
-		input->search = true;
-		cmdargs = parse_args(input->argv[i]);
+		cmdargs = parse_args(input->av[i]);
 		input->middle = ft_strdup(cmdargs[0]);
-		parse_envp(input, input->envp);
-		input->search = false;
+		parse_envp(&(input->middle), input->envp);
 		pipe(end);
-		childs.middle = fork();
-		if (childs.middle == -1)
+		*middle = fork();
+		if (*middle == -1)
 			return (perror("Fork: "), free_and_exit(input, EXIT_FAILURE));
-		else if (childs.middle == 0)
+		else if (*middle == 0)
 		{
 			middle_child(end, input, input->middle, cmdargs);
-			waitpid(childs.middle, &input->exit, 0);
+			waitpid(*middle, &input->exit, 0);
 		}
 		if (input->exit != EXIT_SUCCESS)
 			free_and_exit(input, input->exit);
@@ -64,26 +46,38 @@ void	parent(t_input *input)
 			return (perror("dup2 middle"), free_and_exit(input, EXIT_FAILURE));
 		arr_free(cmdargs);
 		i++;
-		if (i < input->args - 2)
-		{
-			close(end[0]);
-			close(end[1]);
-		}
+		if (i < input->ac - 2)
+			close_fds(end);
 	}
+}
+
+void	parent(t_input *input)
+{
+	int		end[2];
+	t_pid	childs;
+
+	pipe(end);
+	childs.first = fork();
+	if (childs.first == -1)
+		return (perror("Fork: "));
+	else if (childs.first == 0)
+	{
+		parse_envp(&(input->cmd1), input->envp);
+		first_child(end, input);
+		waitpid(childs.first, &input->exit, 0);
+	}
+	dup2(end[0], STDIN_FILENO);
+	close_fds(end);
+	helper_multiple(input, end, &(childs.middle));
 	childs.last = fork();
 	if (childs.last == -1)
-	{
 		return (perror("Fork: "), free_and_exit(input, EXIT_FAILURE));
-	}
 	else if (childs.last == 0)
 	{
+		parse_envp(&(input->cmd2), input->envp);
 		last_child(end, input);
 		waitpid(childs.last, &input->exit, 0);
 	}
-	close(end[0]);
-	close(end[1]);
+	close_fds(end);
 	waitpid(-1, &input->exit, 0);
-	// fprintf(stderr, "%d\n", input->exit);
-	// while (waitpid(-1, &input->exit, 0) != -1)
-	// 	;
 }
