@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:41:45 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/18 16:09:13 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:12:27 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	open_files(t_input *input, char *infile, char *outfile)
 
 void	parse_here_doc(t_input *input)
 {
-	char		**tmp1;
+	char	**tmp1;
 
 	input->f1 = STDIN_FILENO;
 	input->outfile = input->av[input->ac - 1];

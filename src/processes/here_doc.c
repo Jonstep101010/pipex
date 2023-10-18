@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 19:31:32 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/18 16:13:50 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/18 16:16:45 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	here_doc(t_input *input)
 {
 	t_here_doc	s_here_doc;
 
-	ft_bzero(&s_here_doc, sizeof(s_here_doc));
 	pipe(s_here_doc.end);
 	loop_gnl(input, &s_here_doc);
 	s_here_doc.first = fork();
