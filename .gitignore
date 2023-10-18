@@ -62,3 +62,4 @@ pipex
 src/Unity/
 .build_test/
 test/_*.c
+.ruby-version
