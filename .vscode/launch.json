@@ -5,7 +5,7 @@
 			"name": "pipex",
 			"type": "lldb",
 			"request": "launch",
-			"args": ["infile.txt", "ls -l src/", "grep .c", "wc -l", "outfile.txt"],
+			"args": ["inpasdffile.txt", "grep Hello", "wc -l", "outfile.txt"],
 			"env": { "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin" },
 			"cwd": "${workspaceFolder}/",
 			"program": "${workspaceFolder}/pipex",

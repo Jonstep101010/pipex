@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:28 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/18 16:09:58 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/20 22:23:18 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,13 @@ void	check_leaks(void)
 void	check_init_struct(t_input *input, int argc, char **argv, char **envp)
 {
 	if (argc < 5)
-		exit(EXIT_FAILURE);
+		exit(EINVAL);
 	input->av = argv;
 	input->ac = argc;
 	input->envp = envp;
+	input->access = -1;
+	input->err_fd = -1;
+	input->error_cmd = NULL;
 	input->exit = EXIT_SUCCESS;
 	if (argc == 6 && ft_strncmp(argv[1], "here_doc", 8) == 0)
 	{
@@ -43,6 +46,12 @@ void	check_init_struct(t_input *input, int argc, char **argv, char **envp)
 		parse_input(input);
 		default_parent(input);
 	}
+	// if (WIFEXITED(input->exit))
+	// 	input->exit = WEXITSTATUS(input->exit);
+	// if (input->err_fd == ERR_FDO1)
+	// 	free_and_exit(input, EXIT_SUCCESS);
+	// else if (input->access != EXIT_SUCCESS)
+	// 	input->exit = input->access;
 }
 
 	// atexit(check_leaks);

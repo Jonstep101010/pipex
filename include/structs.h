@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/18 16:07:03 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/20 17:59:58 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ typedef struct s_input
 	int			exit;
 	int			ac;
 	char		**av;
-	char		*infile;
+	// char		*infile;
 	int			f1;
 	int			f2;
-	char		*outfile;
+	// char		*outfile;
 	char		*cmd1;
 	char		**cmd1_args;
 	char		*middle;
@@ -30,6 +30,9 @@ typedef struct s_input
 	char		**cmd2_args;
 	char		**envp;
 	char		*limiter;
+	char		*error_cmd;
+	int			access;
+	int			err_fd;
 }	t_input;
 
 typedef struct s_here_doc

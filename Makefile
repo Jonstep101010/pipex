@@ -15,14 +15,16 @@ BUILD_DIR	:= .build
 #                                 source files                                 #
 # ---------------------------------------------------------------------------- #
 
-VPATH		:= src/ src/utils src/io src/processes
+VPATH		:= src/ src/utils src/io src/default_pipe src/here_doc src/multiple_pipe
 
 SRC			:= $(NAME).c
-SRC_UTILS	:= print_file.c create_file.c free.c print_arr.c
-SRC_IO		:= parsing.c path_env.c parse_args.c
-SRC_PROCS	:= parent.c childs.c here_doc.c
+SRC_UTILS	:= print_file.c create_file.c free.c print_arr.c files.c
+SRC_IO		:= parse_pipe.c path_env.c parse_args.c
+SRC_DEF		:= parent.c childs.c
+SRC_HDOC	:= here_doc.c parse_here_doc.c childs_here_doc.c
+SRC_MULT	:= middle.c parent_mult.c
 
-SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_IO) $(SRC_PROCS)
+SRCS		:= $(SRC) $(SRC_UTILS) $(SRC_IO) $(SRC_DEF) $(SRC_HDOC) $(SRC_MULT)
 
 # ---------------------------------------------------------------------------- #
 #                             compilation arguments                            #
@@ -47,8 +49,8 @@ DONE_NL		= printf "\033[0;32m\xE2\x9C\x93\n\033[0m"
 # ---------------------------------------------------------------------------- #
 #                             building the program                             #
 # ---------------------------------------------------------------------------- #
-all: $(NAME)
 bonus: all
+all: $(NAME)
 
 $(LIB_FT):
 	$(MAKE) -C $(@D) -B
