@@ -19,7 +19,7 @@ VPATH		:= src/ src/utils src/io src/default_pipe src/here_doc src/multiple_pipe
 
 SRC			:= $(NAME).c
 SRC_UTILS	:= print_file.c create_file.c free.c print_arr.c files.c
-SRC_IO		:= parse_pipe.c path_env.c parse_args.c
+SRC_IO		:= parse_pipe.c path_env.c parse_args.c error_exit.c
 SRC_DEF		:= parent.c childs.c
 SRC_HDOC	:= here_doc.c parse_here_doc.c childs_here_doc.c
 SRC_MULT	:= middle.c parent_mult.c
@@ -98,7 +98,7 @@ run: all
 	./$(NAME) infile.txt "grep test" "wc" outfile.txt; cat outfile.txt
 	./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt; cat outfile.txt
 	./$(NAME) "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"; cat outs/test-xx.txt
-#./$(NAME) infile.txt "grep test" "awk {count++} END {print count}" outfile.txt;
+# ./$(NAME) infile.txt "grep test" "awk {count++} END {print count}" outfile.txt;
 # ./$(NAME) infile.txt "wc" "ls" outfile.txt
 # ./$(NAME) infile.txt "grep test" "wc -c" outfile.txt
 

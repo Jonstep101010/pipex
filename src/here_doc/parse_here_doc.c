@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:39:12 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/20 18:08:05 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/21 17:34:52 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	parse_here_doc(t_input *input)
 	input->cmd2 = ft_strdup(tmp1[0]);
 	input->cmd2_args = arr_dup(tmp1);
 	arr_free(tmp1);
-	input->f2 = open(input->av[input->ac - 1], O_CREAT | O_WRONLY | O_APPEND, 0644);
+	input->f2 = open(input->av[input->ac - 1], O_CREAT
+			| O_WRONLY | O_APPEND, 0644);
 	if (input->f2 < 0)
 		input->exit = ERR_FDO2;
 	input->limiter = ft_strjoin(input->av[2], "\n");
