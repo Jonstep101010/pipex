@@ -1,6 +1,8 @@
 NAME		  := pipex
 .DEFAULT_GOAL := all
 
+#change compiler if on linux
+
 # --------------------------------- includes --------------------------------- #
 
 INCS		= ./include \
@@ -34,6 +36,9 @@ OBJS		:= $(addprefix $(BUILD_DIR)/, $(SRCS:%.c=%.o))
 DEPS		:= $(OBJS:.o=.d)
 
 CC			:= clang
+ifeq ($(shell uname), Linux)
+	CC = gcc
+endif
 CFLAGS		?= -g3 -Wall -Wextra -Werror -DRELEASE=1 #-Wpedantic
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS		= $(addprefix -L, $(dir $(LIB_FT)))
@@ -91,13 +96,15 @@ re:
 	$(MAKE) fclean
 	$(MAKE) all
 
+VALGRIND = valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes
+
 # ----------------------------- additional rules ----------------------------- #
 run: all
 	rm -f outfile.txt
-	./$(NAME) infile.txt "ls -l src/" "grep .c" "wc -l" outfile.txt; cat outfile.txt
-	./$(NAME) infile.txt "grep test" "wc" outfile.txt; cat outfile.txt
-	./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt; cat outfile.txt
-	./$(NAME) "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"; cat outs/test-xx.txt
+	$(VALGRIND) ./$(NAME) infile.txt "ls -l src/" "grep .c" "wc -l" outfile.txt; cat outfile.txt
+	$(VALGRIND) ./$(NAME) infile.txt "grep test" "wc" outfile.txt; cat outfile.txt
+	$(VALGRIND) ./$(NAME) infile.txt "grep test" "awk '{count++} END {print count}'" outfile.txt; cat outfile.txt
+	$(VALGRIND) ./$(NAME) "/dev/urandom" "cat" "head -1" "outs/test-xx.txt"; cat outs/test-xx.txt
 # ./$(NAME) infile.txt "grep test" "awk {count++} END {print count}" outfile.txt;
 # ./$(NAME) infile.txt "wc" "ls" outfile.txt
 # ./$(NAME) infile.txt "grep test" "wc -c" outfile.txt

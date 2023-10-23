@@ -29,6 +29,8 @@ allowed external functions:
 - pipe, unlink, wait, waitpid
 */
 
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <errno.h>
 # include <fcntl.h>
 # include "libft.h"

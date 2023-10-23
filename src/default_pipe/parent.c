@@ -54,7 +54,7 @@ void	default_parent(t_input *input)
 	close_fds(s_pipes.end);
 	waitpid(-1, &input->exit, 0);
 	if (WEXITSTATUS(input->exit) == 255 && WIFEXITED(input->exit))
-		exit(127);
+		free_and_exit(input, 127);
 	if (WIFEXITED(input->exit))
-		exit(WEXITSTATUS(input->exit));
+		free_and_exit(input, WEXITSTATUS(input->exit));
 }
