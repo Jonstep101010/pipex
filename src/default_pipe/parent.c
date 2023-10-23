@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:44:23 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/20 21:49:09 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:17:07 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,4 @@ void	default_parent(t_input *input)
 	last_fork(input, &s_pipes);
 	close_fds(s_pipes.end);
 	waitpid(-1, &input->exit, 0);
-	if (WEXITSTATUS(input->exit) == 255 && WIFEXITED(input->exit))
-		free_and_exit(input, 127);
-	if (WIFEXITED(input->exit))
-		free_and_exit(input, WEXITSTATUS(input->exit));
 }

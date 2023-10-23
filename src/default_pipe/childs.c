@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:39:07 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:46:20 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:24:37 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	first_child(int end[2], t_input *input)
 	if (execve((char const *)input->cmd1, input->cmd1_args \
 		, input->envp) == -1)
 	{
-		return (free_and_exit(input, input->exit));
+		free_and_exit(input, input->exit);
 	}
 }
 		// fprintf(stderr, "execve failed\n");
@@ -39,8 +39,7 @@ void	first_child(int end[2], t_input *input)
 
 void	last_child(int end[2], t_input *input)
 {
-	close(end[1]);
-	close(end[0]);
+	close_fds(end);
 	if (dup2(input->f2, STDOUT_FILENO) == -1)
 	{
 		free_and_exit(input, 9);
@@ -49,7 +48,7 @@ void	last_child(int end[2], t_input *input)
 	if (execve((char const *)input->cmd2, input->cmd2_args \
 		, input->envp) == -1)
 	{
-		return (free_and_exit(input, input->exit));
+		free_and_exit(input, input->exit);
 	}
 }
 		// perror("dup2: last_child");

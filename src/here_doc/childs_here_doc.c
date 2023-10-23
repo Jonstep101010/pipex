@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:44:50 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:43:41 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:23:32 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ static void	hd_first_child(int end[2], t_input *input)
 	if (dup2(input->f1, STDIN_FILENO) == -1)
 	{
 		perror("dup2:1 first_child");
-		free_and_exit(input, EXIT_FAILURE);
+		free_and_exit(input, 9);
 	}
 	if (dup2(end[1], STDOUT_FILENO) == -1)
 	{
 		perror("dup2:2 first_child");
-		free_and_exit(input, EXIT_FAILURE);
+		free_and_exit(input, 9);
 	}
 	close(input->f1);
 	close(end[1]);
@@ -33,7 +33,7 @@ static void	hd_first_child(int end[2], t_input *input)
 	{
 		free_null_str(&(input->cmd1));
 		input->error_cmd = input->cmd1_args[0];
-		return (free_and_exit(input, EXIT_SUCCESS));
+		free_and_exit(input, EXIT_SUCCESS);
 	}
 }
 

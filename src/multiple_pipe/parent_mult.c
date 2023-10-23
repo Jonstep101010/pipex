@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 16:18:10 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:16:16 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:21:56 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	multiple_pipes(t_input *input, t_pipes *s_pipes)
 		if (input->exit != EXIT_SUCCESS)
 			free_and_exit(input, input->exit);
 		if (dup2(s_pipes->end[0], STDIN_FILENO) == -1)
-			return (perror("dup2 middle"), free_and_exit(input, EXIT_FAILURE));
+			return (perror("dup2 middle"), free_and_exit(input, 9));
 		arr_free(s_pipes->cmdargs);
 		s_pipes->i++;
 		if (s_pipes->i < input->ac - 2)

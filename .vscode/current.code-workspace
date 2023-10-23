@@ -1,0 +1,66 @@
+{
+	"folders": [
+		{
+			"path": "../../../other/learning/pipex-1"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"[c]": {
+			"files.insertFinalNewline": true,
+			"editor.tabSize": 4,
+			"files.trimTrailingWhitespace": true,
+			"editor.wordWrapColumn": 80,
+			"editor.wrappingIndent": "indent",
+		},
+		"editor.guides.highlightActiveIndentation": true,
+		"editor.guides.highlightActiveBracketPair": true,
+		"files.associations": {
+			"stddef.h": "c",
+			"algorithm": "c",
+			"__locale": "c",
+			"atomic": "c",
+			"cstdlib": "c",
+			"locale": "c",
+			"ostream": "c",
+			"typeinfo": "c",
+			"complex": "c",
+			"new": "c",
+			"cstdio": "c",
+			"cstdarg": "c",
+			"ft_printf.h": "c",
+			"istream": "c",
+			"__functional_03": "c",
+			"__mutex_base": "c",
+			"memory": "c",
+			"__bit_reference": "c",
+			"__node_handle": "c",
+			"array": "c",
+			"functional": "c",
+			"ios": "c",
+			"optional": "c",
+			"sstream": "c",
+			"streambuf": "c",
+			"string_view": "c",
+			"tuple": "c",
+			"vector": "c",
+			"iterator": "c",
+			"list": "c",
+			"assert.h": "c",
+			"structs.h": "c",
+			"libft.h": "c",
+			"mock_calculator.h": "c",
+			"parse_args.h": "c",
+			"calculator.h": "c",
+			"utility": "c",
+			"__hash_table": "c",
+			"__split_buffer": "c",
+			"initializer_list": "c",
+			"string": "c",
+			"unordered_map": "c",
+			"pipex.h": "c"
+		},
+	},
+}
