@@ -33,6 +33,7 @@ allowed external functions:
 # include <fcntl.h>
 # include "libft.h"
 # include "structs.h"
+# include <wait.h>
 
 void	multiple_parent(t_input *input);
 

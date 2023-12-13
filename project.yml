@@ -1,10 +1,4 @@
 ---
-
-# Notes:
-# Sample project C code is not presently written to produce a release artifact.
-# As such, release build options are disabled.
-# This sample, therefore, only demonstrates running a collection of unit tests.
-
 :project:
   :use_exceptions: FALSE
   :use_test_preprocessor: TRUE
@@ -12,21 +6,16 @@
   :use_auxiliary_dependencies: TRUE
   :use_auto_dependencies: TRUE
   :build_root: .build_test
-#  :release_build: TRUE
+  :release_build: TRUE
   :test_file_prefix: test_
   :which_ceedling: gem
   :ceedling_version: '?'
   :default_tasks:
     - test:all
 
-#:test_build:
-#  :use_assembly: TRUE
-
-#:release_build:
-#  :output: MyApp.out
-#  :use_assembly: FALSE
-
-:environment:
+:release_build:
+  :output: pipex.out
+  :use_assembly: FALSE
 
 :extension:
   :executable: .out
@@ -36,15 +25,19 @@
     - +:test/**
     - -:test/support
   :source:
-    - src/**
+    - +:src/
+    - +:src/utils
+    - +:src/io
+    - +:src/default_pipe
+    - +:src/here_doc
+    - +:src/multiple_pipe
+  :include:
+    - +:include/
+    - +:include/libft/include/
   :support:
-    - test/support
+    - +:test/support
   :libraries:
     - include/libft/
-  :include:
-    - include/
-    - include/libft/include/
-    - src/**
 
 :defines:
   # in order to add common defines:
@@ -72,21 +65,49 @@
     int8:     INT8
     bool:     UINT8
 
-# Add -gcov to the plugins list to make sure of the gcov plugin
-# You will need to have gcov and gcovr both installed to make it work.
-# For more information on these options, see docs in plugins/gcov
-:gcov:
-  :reports:
-    - HtmlDetailed
-  :gcovr:
-    :html_medium_threshold: 75
-    :html_high_threshold: 90
-
-#:tools:
 # Ceedling defaults to using gcc for compiling, linking, etc.
 # As [:tools] is blank, gcc will be used (so long as it's in your system path)
 # See documentation to configure a given toolchain for use
-
+:tools:
+  :test_compiler:
+    :executable: clang
+    :name: 'clang test compiler'
+    :arguments:
+      - -I"$": COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
+      - -c ${1}
+      - -o ${2}
+  :test_linker:
+    :executable: clang
+    :name: 'clang test linker'
+    :arguments:
+      - ${1}
+      - -o ${2}
+      - -Linclude/libft/.build_libft/release
+      - -lft
+  :release_compiler:
+    :executable: clang
+    :name: 'clang release compiler'
+    :arguments:
+      - -Wall
+      - -Wextra
+      - -Werror
+      - -I"$": COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
+      - -I"$": COLLECTION_PATHS_TEST_TOOLCHAIN_INCLUDE
+      - -MMD -MP
+      - -DRELEASE=1
+      - -c ${1}
+      - -o ${2}
+  :release_linker:
+    :executable: clang
+    :name: 'clang release linker'
+    :arguments:
+      - ${1}               #list of object files to link
+      - -Linclude/libft/.build_libft/release
+      - -lft
+      - -o pipex
+  :release_dependencies_generator:
+    :executable: clang
+    :name: Clang
 
 # LIBRARIES
 # These libraries are automatically injected into the build process. Those specified as
@@ -96,27 +117,26 @@
   :placement: :end
   :flag: "-l${1}"
   :path_flag: "-L ${1}"
-  :system: []    # for example, you might list 'm' to grab the math library
-  :test:
-    - ft
-  :artifacts:
-    :includes:
-      - include/libft/include/*
-      - include/*
-  :release:
-    - ft
+  :system: []
+
+:dependencies:
+  :libraries:
+    - :name: libft
+      :source_path: include/libft
+      :artifact_path: include/libft
+      :build:
+        - "ceedling release"
+      :artifacts:
+        :includes:
+          - include
+        :static_libraries:
+          - .build_libft/release/libft.a
 
 :plugins:
   :load_paths:
     - "#{Ceedling.load_path}"
   :enabled:
     - xml_tests_report
-    - stdout_pretty_tests_report
-    - module_generator
-:module_generator:
-  :test_define: CEEDLING_TEST
-  :project_root: ./
-  :source_root: src/
-  :include_root: include/
-  :test_root: test/
+    - dependencies
+    - compile_commands_json
 ...
