@@ -1,5 +1,5 @@
 NAME		  := pipex
-.DEFAULT_GOAL := all
+.DEFAULT_GOAL := ceedling
 
 # --------------------------------- includes --------------------------------- #
 
@@ -49,6 +49,9 @@ DONE_NL		= printf "\033[0;32m\xE2\x9C\x93\n\033[0m"
 # ---------------------------------------------------------------------------- #
 #                             building the program                             #
 # ---------------------------------------------------------------------------- #
+ceedling: 
+	cd include/libft && make ceedling
+	ceedling release
 bonus: all
 all: $(NAME)
 

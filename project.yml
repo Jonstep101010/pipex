@@ -36,8 +36,8 @@
     - +:include/libft/include/
   :support:
     - +:test/support
-  :libraries:
-    - include/libft/
+  # :libraries:
+  #   - include/libft/
 
 :defines:
   # in order to add common defines:

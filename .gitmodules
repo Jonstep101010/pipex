@@ -1,4 +1,4 @@
 [submodule "libft"]
 	path = include/libft
 	url = https://github.com/Jonstep101010/libft
-	branch = main
+	branch = minishell
