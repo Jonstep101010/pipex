@@ -5,7 +5,7 @@
   :use_deep_dependencies: TRUE
   :use_auxiliary_dependencies: TRUE
   :use_auto_dependencies: TRUE
-  :build_root: .build_test
+  :build_root: build
   :release_build: TRUE
   :test_file_prefix: test_
   :which_ceedling: gem
@@ -82,7 +82,7 @@
     :arguments:
       - ${1}
       - -o ${2}
-      - -Linclude/libft/.build_libft/release
+      - -Linclude/libft/build/release
       - -lft
   :release_compiler:
     :executable: clang
@@ -102,7 +102,7 @@
     :name: 'clang release linker'
     :arguments:
       - ${1}               #list of object files to link
-      - -Linclude/libft/.build_libft/release
+      - -Linclude/libft/build/release
       - -lft
       - -o pipex
   :release_dependencies_generator:
@@ -113,11 +113,6 @@
 # These libraries are automatically injected into the build process. Those specified as
 # common will be used in all types of builds. Otherwise, libraries can be injected in just
 # tests or releases. These options are MERGED with the options in supplemental yaml files.
-:libraries:
-  :placement: :end
-  :flag: "-l${1}"
-  :path_flag: "-L ${1}"
-  :system: []
 
 :dependencies:
   :libraries:
@@ -130,7 +125,7 @@
         :includes:
           - include
         :static_libraries:
-          - .build_libft/release/libft.a
+          - build/release/libft.a
 
 :plugins:
   :load_paths:

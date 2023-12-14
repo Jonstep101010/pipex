@@ -6,13 +6,13 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 11:47:28 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:45:08 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/13 11:24:34 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-// #ifdef RELEASE
+#ifdef RELEASE
 void	check_leaks(void)
 {
 	system("leaks pipex");
@@ -61,3 +61,4 @@ int	main(int argc, char **argv, char **envp)
 	check_init_struct(&input, argc, argv, envp);
 	free_and_exit(&input, input.exit);
 }
+#endif
