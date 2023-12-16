@@ -6,14 +6,14 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:41:55 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/18 11:27:51 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/16 17:41:52 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef RELEASE
 # include "pipex.h"
 #endif
-#include "libft.h"
+#include "../../include/libft/include/libft.h"
 #include "parse_args.h"
 
 static int	str_cchr(char *s, char c)
