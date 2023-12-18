@@ -64,3 +64,5 @@ chat_*.md
 .build_test/
 .cache
 gptlogs/
+
+build/

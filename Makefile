@@ -50,7 +50,7 @@ DONE_NL		= printf "\033[0;32m\xE2\x9C\x93\n\033[0m"
 #                             building the program                             #
 # ---------------------------------------------------------------------------- #
 ceedling: 
-	cd include/libft && make ceedling
+	cd include/libft && ceedling release
 	ceedling release
 bonus: all
 all: $(NAME)
