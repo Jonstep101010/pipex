@@ -6,13 +6,14 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 16:32:44 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:47:17 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/19 10:25:04 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 # include <stdbool.h>
+# include <sys/types.h>
 
 typedef struct s_input
 {

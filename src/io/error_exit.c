@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:58:27 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:34:21 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/18 18:35:42 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,43 @@ void	free_and_exit(t_input *input, int exit_code)
 	close(input->f1);
 	close(input->f2);
 	exit(exit_code);
+}
+
+void	free_exit_parent(t_input *input)
+{
+	int	exit_code;
+	if (WEXITSTATUS(input->exit) == 255 && WIFEXITED(input->exit))
+	{
+		exit_code = 127;
+		if (input->cmd1 && *input->cmd1)
+			free_null_str(&(input->cmd1));
+		if (input->cmd2 && *input->cmd2)
+			free_null_str(&(input->cmd2));
+		if (input->middle && *input->middle)
+			free_null_str(&(input->middle));
+		if (input->cmd1_args)
+			arr_free(input->cmd1_args);
+		if (input->cmd2_args)
+			arr_free(input->cmd2_args);
+		close(input->f1);
+		close(input->f2);
+		exit(exit_code);
+	}
+	if (WIFEXITED(input->exit))
+	{
+		exit_code = WEXITSTATUS(input->exit);
+		if (input->cmd1 && *input->cmd1)
+			free_null_str(&(input->cmd1));
+		if (input->cmd2 && *input->cmd2)
+			free_null_str(&(input->cmd2));
+		if (input->middle && *input->middle)
+			free_null_str(&(input->middle));
+		if (input->cmd1_args)
+			arr_free(input->cmd1_args);
+		// if (input->cmd2_args && *input->cmd2_args)
+		// 	arr_free(input->cmd2_args);
+		close(input->f1);
+		close(input->f2);
+		exit(exit_code);
+	}
 }

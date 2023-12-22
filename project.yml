@@ -15,8 +15,7 @@
 
 :release_build:
   :output: pipex.out
-  :use_assembly: FALSE
-
+  :use_assembly: TRUE
 :extension:
   :executable: .out
 
@@ -31,9 +30,17 @@
     - +:src/default_pipe
     - +:src/here_doc
     - +:src/multiple_pipe
+    # - +:include/libft/src/arr/
+    # - +:include/libft/src/char/
+    # - +:include/libft/src/gnl/
+    # - +:include/libft/src/io/
+    # - +:include/libft/src/list/
+    # - +:include/libft/src/memory/
+    # - +:include/libft/src/printf/
+    # - +:include/libft/src/string/
   :include:
-    - +:include/
-    - +:include/libft/include/
+    - include/
+    - include/libft/include/
   :support:
     - +:test/support
   # :libraries:
@@ -81,20 +88,20 @@
     :name: 'clang test linker'
     :arguments:
       - ${1}
-      - -o ${2}
       - -Linclude/libft/build/release
       - -lft
+      - -o ${2}
   :release_compiler:
     :executable: clang
     :name: 'clang release compiler'
     :arguments:
+      - -g3
       - -Wall
       - -Wextra
       - -Werror
-      - -I"$": COLLECTION_PATHS_TEST_SUPPORT_SOURCE_INCLUDE_VENDOR
-      - -I"$": COLLECTION_PATHS_TEST_TOOLCHAIN_INCLUDE
+      - -I$: COLLECTION_PATHS_SOURCE_INCLUDE_VENDOR
+      - -I$: COLLECTION_PATHS_RELEASE_TOOLCHAIN_INCLUDE
       - -MMD -MP
-      - -DRELEASE=1
       - -c ${1}
       - -o ${2}
   :release_linker:
@@ -102,8 +109,8 @@
     :name: 'clang release linker'
     :arguments:
       - ${1}               #list of object files to link
-      - -Linclude/libft/build/release
-      - -lft
+      # - -Linclude/libft/build/release
+      # - -lft
       - -o pipex
   :release_dependencies_generator:
     :executable: clang
@@ -114,18 +121,18 @@
 # common will be used in all types of builds. Otherwise, libraries can be injected in just
 # tests or releases. These options are MERGED with the options in supplemental yaml files.
 
-:dependencies:
-  :libraries:
-    - :name: libft
-      :source_path: include/libft
-      :artifact_path: include/libft
-      :build:
-        - "ceedling release"
-      :artifacts:
-        :includes:
-          - include
-        :static_libraries:
-          - build/release/libft.a
+# :dependencies:
+#   :libraries:
+#     - :name: libft
+#       :source_path: include/libft
+#       :artifact_path: include/libft
+#       :build:
+#         - "ceedling release"
+#       :artifacts:
+#         :includes:
+#           - include
+#         :static_libraries:
+#           - build/release/libft.a
 
 :plugins:
   :load_paths:

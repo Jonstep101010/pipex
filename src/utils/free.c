@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 17:38:37 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:10:21 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/18 18:33:43 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	free_and_null(void *tofree)
  */
 void	free_null_str(char **tofree)
 {
+	if (!tofree || !*tofree)
+		return ;
 	free(*tofree);
 	tofree = NULL;
 }

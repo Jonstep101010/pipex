@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 11:41:55 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/12/16 17:41:52 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/18 17:14:19 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	**parse_args(char *s)
 	int		count;
 	char	**ret;
 
+	ret = NULL;
 	if (ft_strchr(s, '\'') == 0 && (ft_strchr(s, '{') == 0
 			|| ft_strchr(s, '}') == 0))
 		return (ft_split(s, ' '));

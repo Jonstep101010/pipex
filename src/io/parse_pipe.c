@@ -6,7 +6,7 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:41:45 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/20 21:29:46 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/18 17:17:20 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	parse_input(t_input *input)
 	char	**tmp1;
 	char	**tmp2;
 
+	tmp1 = NULL;
+	tmp2 = NULL;
 	open_files(input, input->av[1], input->av[input->ac - 1]);
 	tmp1 = parse_args(input->av[2]);
 	if (!tmp1 || !*tmp1 || !**tmp1)
@@ -41,5 +43,6 @@ void	parse_input(t_input *input)
 	if (!tmp2 || !*tmp2 || !**tmp2)
 		return (free_and_exit(input, EXIT_FAILURE));
 	input->cmd2 = ft_strdup(tmp2[0]);
-	input->cmd2_args = tmp2;
+	input->cmd2_args = arr_dup(tmp2);
+	arr_free(tmp2);
 }

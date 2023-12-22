@@ -6,14 +6,13 @@
 /*   By: jschwabe <jschwabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 16:39:07 by jschwabe          #+#    #+#             */
-/*   Updated: 2023/10/21 17:46:20 by jschwabe         ###   ########.fr       */
+/*   Updated: 2023/12/19 10:17:02 by jschwabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include "structs.h"
 
-		// perror("dup2:1 first_child");
-		// perror("dup2:2 first_child");
 void	first_child(int end[2], t_input *input)
 {
 	if (dup2(input->f1, STDIN_FILENO) == -1)

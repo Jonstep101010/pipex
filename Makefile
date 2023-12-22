@@ -1,5 +1,5 @@
 NAME		  := pipex
-.DEFAULT_GOAL := ceedling
+.DEFAULT_GOAL := bonus
 
 # --------------------------------- includes --------------------------------- #
 
